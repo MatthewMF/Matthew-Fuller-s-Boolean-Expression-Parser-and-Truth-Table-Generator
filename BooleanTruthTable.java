@@ -90,7 +90,7 @@ public class BooleanTruthTable {
                     }
                     else
                     {
-                        System.out.println("a");
+                        //System.out.println("a");
                         return false;
                     }
                 }
@@ -98,40 +98,26 @@ public class BooleanTruthTable {
                 {
                     if(evalStack.isEmpty())
                     {
-                        System.out.println("b");
+                        //System.out.println("b");
                         return false;
                     }
                     char operator1 = evalStack.pop();
                     if(evalStack.isEmpty())
                     {
-                        System.out.println("c");
+                        //System.out.println("c");
                         return false;
                     }
                     char operator2 = evalStack.pop();
 
                     boolean result = false;
 
-                    if(c == '&')
+                    if(c == '*')
                     {
-                        if(operator1 == 'T' && operator2 == 'T')
-                        {
-                            result = true;
-                        }
-                        else 
-                        {
-                            result = false;
-                        }
+                        result = (operator1 == 'T' && operator2 == 'T');
                     }
-                    else if(c == '|')
+                    else if(c == '+')
                     {
-                        if (operator1 == 'T' || operator2 == 'T')
-                        {
-                            result = true;
-                        }
-                        else
-                        {
-                            result = false;
-                        }
+                        result = (operator1 == 'T' || operator2 == 'T');
                     }
                     if(result)
                     {
@@ -144,15 +130,9 @@ public class BooleanTruthTable {
                 }
             }
         }
-    if(!evalStack.isEmpty() && evalStack.pop() == 'T')
-    {
-        return true;
+        return !evalStack.isEmpty() && evalStack.pop() == 'T';
     }
-    else 
-    {
-        return false;
-    }
-}
+    
     public static void TruthTable(String function )
     {
         String posfix = infixTopostfix(function);
@@ -171,26 +151,32 @@ public class BooleanTruthTable {
         int numv = v.length();
         int numRows = (int) Math.pow(2, numv);
 
-        for(int i = 0; i < numRows; i++) 
+        for(int i = numRows - 1; i >= 0; i--) 
         {
             String truthv = "";
             for(int j = 0; j < numv; j++)
             {
-                boolean TorF = ((i / (int)Math.pow(2, numv - j - 1)) % 2 == 1);
+                boolean TorF = ((i / (int)Math.pow(2, j)) % 2 == 1);
                 if(TorF == true) 
                 {
                     truthv += "T";
-                    System.out.print("T ");
+                    System.out.print("T " + " | ");
                 }
                 else
                 {
                     truthv += "F";
-                    System.out.print("F ");
+                    System.out.print("F " + " | ");
                 } 
             }
             boolean result = postfixTF(posfix, v, truthv);
-            if(result){System.out.println("| T");}
-            else{System.out.println("| F");}
+            if(result)
+            {
+                System.out.println("T");
+            }
+            else
+            {
+                System.out.println("F");
+            }
         }
     }
 }
