@@ -5,9 +5,10 @@ public class Main {
         /*LinkedListStack lstack = new LinkedListStack();
         lstack.pop();
         System.out.println(lstack.peek());*/
+        //Scanner scan = new Scanner(System.in);
 
-        String expresion = "5+2/(3-8)^5^2";
+        String expresion = "A+B";
 
-        System.out.print(ShuntingYardAlgo.infixTopostfix(expresion));
+       BooleanTruthTable.TruthTable(expresion);
     }
 }
